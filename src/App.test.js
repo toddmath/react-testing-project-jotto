@@ -1,5 +1,4 @@
-import App from './App';
+import React from "react";
+import App from "./App";
 
-test('renders learn react link', () => {
-
-});
+test("renders learn react link", () => {});
