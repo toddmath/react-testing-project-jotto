@@ -17,7 +17,7 @@ const Congrats = props => {
       </div>
     );
   }
-  return <div data-test="component-congrats"></div>;
+  return <div data-test="component-congrats" />;
 };
 
 Congrats.propTypes = {
