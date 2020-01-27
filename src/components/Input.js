@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
-export const Input = () => {
-  return (
-    <div>
-      Input
-    </div>
-  )
+class Input extends Component {
+  render() {
+    return (
+      <div>
+        Input
+      </div>
+    )
+  }
 }
+
+const mapStateToProps = (state) => {
+  return {};
+}
+
+export default connect(mapStateToProps)(Input);
