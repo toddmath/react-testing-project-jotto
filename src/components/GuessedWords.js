@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { Table } from "reactstrap";
+
 const GuessedWords = ({ guessedWords }) => (
   <div data-test="component-guessed-words">
     {guessedWords.length === 0 ? (
@@ -10,22 +12,24 @@ const GuessedWords = ({ guessedWords }) => (
     ) : (
       <div data-test="guessed-words">
         <h3>Guessed Words</h3>
-        <table className="table table-sm">
-          <thead className="thead-light">
+        <Table striped size="sm" responsive>
+          <thead className="thead-dark">
             <tr>
+              <th>#</th>
               <th>Guess</th>
               <th>Matching Letters</th>
             </tr>
-            <tbody>
-              {guessedWords.map(({ guessedWord, letterMatchCount }, index) => (
-                <tr data-test="guessed-word" key={index}>
-                  <td>{guessedWord}</td>
-                  <td>{letterMatchCount}</td>
-                </tr>
-              ))}
-            </tbody>
           </thead>
-        </table>
+          <tbody>
+            {guessedWords.map(({ guessedWord, letterMatchCount }, index) => (
+              <tr data-test="guessed-word" key={index}>
+                <th scope="row">{index}</th>
+                <td>{guessedWord}</td>
+                <td>{letterMatchCount}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
       </div>
     )}
   </div>
