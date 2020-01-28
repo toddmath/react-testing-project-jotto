@@ -1,9 +1,6 @@
-// import { actionTypes } from "../actions";
-import { correctGuess } from "../actions";
-// import { correctGuess } from "../slices/successSlice";
-import successReducer from "./successReducer";
+import successReducer, { correctGuess } from "./successSlice";
 
-describe("successReducer", () => {
+describe("successSlice", () => {
   test("returns default initial state of `false` when no action passed", () => {
     const newState = successReducer(undefined, {});
 

@@ -1,4 +1,7 @@
-import { actionTypes } from "../actions";
+// import { actionTypes } from "../actions";
+import { createReducer } from "@reduxjs/toolkit";
+
+import { correctGuess } from "../actions/index";
 
 /**
  * @function successReducer
@@ -6,11 +9,26 @@ import { actionTypes } from "../actions";
  * @param {object} action action to be reduced.
  * @returns {boolean} new success state.
  */
-export default (state, action) => {
-  switch (action.type) {
-    case actionTypes.CORRECT_GUESS:
-      return true;
-    default:
-      return false;
-  }
-};
+// export const successReducer = (state, action) => {
+//   switch (action.type) {
+//     case actionTypes.CORRECT_GUESS:
+//       return true;
+//     default:
+//       return false;
+//   }
+// };
+
+// const successReducer = (state, action) => {
+//   switch (action.type) {
+//     case correctGuess.type:
+//       return true;
+//     default:
+//       return false;
+//   }
+// };
+
+const successReducer = createReducer(false, {
+  [correctGuess]: state => true
+});
+
+export default successReducer;
