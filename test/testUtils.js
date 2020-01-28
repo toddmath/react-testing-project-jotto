@@ -4,10 +4,11 @@ import checkPropTypes from "check-prop-types";
 // import { createStore } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import { mergeDeepRight } from "ramda";
+// import { mergeDeepRight } from "ramda";
 // import { mount } from "enzyme";
 
-import rootReducer from "../src/reducers";
+// import rootReducer from "../src/reducers";
+import { rootReducer } from "../src/configureStore";
 
 /**
  * Return node(s) with the given data-test attribute.
@@ -40,18 +41,18 @@ export const checkProps = (component, conformingProps) => {
 export const storeFactory = (state = {}) =>
   configureStore({ reducer: rootReducer, preloadedState: state });
 
-export const makeStore = (customState = {}) => {
-  const root = rootReducer({}, { type: "@@INIT" });
-  const state = mergeDeepRight(root, customState);
+// export const makeStore = (customState = {}) => {
+//   const root = rootReducer({}, { type: "@@INIT" });
+//   const state = mergeDeepRight(root, customState);
 
-  // return configureStore(rootReducer, state);
-  return storeFactory(state);
-};
+//   // return configureStore(rootReducer, state);
+//   return storeFactory(state);
+// };
 
 export const reduxify = (Component, props = {}, state = {}) => {
   return function reduxWrap() {
     return (
-      <Provider store={makeStore(state)}>
+      <Provider store={storeFactory(state)}>
         <Component {...props} />
       </Provider>
     );

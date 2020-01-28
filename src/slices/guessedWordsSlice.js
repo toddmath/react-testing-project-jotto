@@ -1,23 +1,39 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
+import { getLetterMatchCount } from "../helpers";
+import { correctGuess } from "./successSlice";
 
 const guessedWordsSlice = createSlice({
-  name: "guessedWord",
-  initialState: false,
+  name: "guessedWords",
+  initialState: [],
   reducers: {
-    correctGuess: state => true,
-    guessedWords: (state, action) => {
-      return null
+    guessWord: (state, action) => {
+      const { guessedWord, letterMatchCount } = action.payload;
+      state.push({ guessedWord, letterMatchCount });
     }
   }
 });
 
-export const { correctGuess, guessedWords } = guessedWordsSlice.actions;
+export const { guessWord } = guessedWordsSlice.actions;
 export default guessedWordsSlice.reducer;
 
 export const fetchWord = guessedWord => async dispatch => {
   try {
-
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const handleGuessWord = guessedWord => (dispatch, getState) => {
+  try {
+    const secretWord = getState().secretWord;
+    const letterMatchCount = getLetterMatchCount(guessedWord, secretWord);
+
+    dispatch(guessWord({ guessedWord, letterMatchCount }));
+
+    if (guessedWord === secretWord) {
+      dispatch(correctGuess());
+    }
+  } catch (error) {
+    console.log(error.message);
   }
 };
