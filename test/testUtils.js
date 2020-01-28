@@ -1,10 +1,11 @@
 /* eslint-disable react/forbid-foreign-prop-types */
 import React from "react";
 import checkPropTypes from "check-prop-types";
-import { createStore } from "redux";
+// import { createStore } from "redux";
+import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import { mergeDeepRight } from "ramda";
-import { mount } from "enzyme";
+// import { mount } from "enzyme";
 
 import rootReducer from "../src/reducers";
 
@@ -36,13 +37,15 @@ export const checkProps = (component, conformingProps) => {
  * @function storeFactory
  * @returns {Store} Redux store.
  */
-export const storeFactory = (state = {}) => createStore(rootReducer, state);
+export const storeFactory = (state = {}) =>
+  configureStore({ reducer: rootReducer, preloadedState: state });
 
 export const makeStore = (customState = {}) => {
   const root = rootReducer({}, { type: "@@INIT" });
   const state = mergeDeepRight(root, customState);
 
-  return createStore(rootReducer, state);
+  // return configureStore(rootReducer, state);
+  return storeFactory(state);
 };
 
 export const reduxify = (Component, props = {}, state = {}) => {
@@ -55,14 +58,14 @@ export const reduxify = (Component, props = {}, state = {}) => {
   };
 };
 
-export const makeMountRender = (Component, defaultProps = {}) => {
-  return (customProps = {}) => {
-    const props = {
-      ...defaultProps,
-      ...customProps
-    };
-    return mount(<Component {...props} />);
-  };
-};
+// export const makeMountRender = (Component, defaultProps = {}) => {
+//   return (customProps = {}) => {
+//     const props = {
+//       ...defaultProps,
+//       ...customProps
+//     };
+//     return mount(<Component {...props} />);
+//   };
+// };
 
 export const snapshotify = reactWrapper => reactWrapper.html();
