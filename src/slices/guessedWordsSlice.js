@@ -16,12 +16,12 @@ const guessedWordsSlice = createSlice({
 export const { guessWord } = guessedWordsSlice.actions;
 export default guessedWordsSlice.reducer;
 
-export const fetchWord = guessedWord => async dispatch => {
-  try {
-  } catch (error) {
-    console.log(error);
-  }
-};
+// export const fetchWord = guessedWord => async dispatch => {
+//   try {
+//   } catch (error) {
+//     console.log(error);
+//   }
+// };
 
 export const handleGuessWord = guessedWord => (dispatch, getState) => {
   try {

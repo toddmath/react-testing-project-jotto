@@ -1,4 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
+// import axios from "axios";
 // import { getLetterMatchCount } from "../helpers";
 
 export const actionTypes = {
@@ -22,4 +23,9 @@ export const guessWord = createAction("GUESS_WORD");
 //       type:
 //     })
 //   };
+// };
+
+// export const getSecretWord = () => async dispatch => {
+//   const response = await axios.get("http://localhost:3030");
+//   dispatch(setSecretWord())
 // };
