@@ -3,7 +3,7 @@ import moxios from "moxios";
 import { getSecretWord } from "./secretWordSlice";
 import { storeFactory } from "../../test/testUtils";
 
-describe("getSecretWord action creator", () => {
+describe("getSecretWord async action creator and secretWordSlice", () => {
   beforeEach(() => {
     moxios.install();
   });
@@ -30,7 +30,7 @@ describe("getSecretWord action creator", () => {
     // console.log(newState.secretWord, secretWord);
     // expect(newState.secretWord).toBe(secretWord);
 
-    store.dispatch(getSecretWord()).then(() => {
+    await store.dispatch(getSecretWord()).then(() => {
       const newState = store.getState();
 
       expect(newState.secretWord).toBe(secretWord);

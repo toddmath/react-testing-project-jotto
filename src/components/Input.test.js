@@ -17,6 +17,13 @@ const setup = (initialState = {}) => {
     .dive();
 };
 
+const shallowSetup = (initialState = {}) => {
+  return shallow(
+    <Input store={storeFactory(initialState)} />,
+    initialState
+  ).dive();
+};
+
 describe("render", () => {
   describe("word has not been guessed", () => {
     let wrapper;
@@ -77,3 +84,18 @@ describe("render", () => {
 
 // TODO: add updates state test to Input.test.js
 describe("updates state", () => {});
+
+describe("redux props", () => {
+  test("has success piece of state as prop", () => {
+    const success = true;
+    const wrapper = shallowSetup({ success });
+    const successProp = wrapper.props().success;
+    expect(successProp).toBe(success);
+  });
+
+  test("`guessWord` action creator is a function prop", () => {
+    const wrapper = shallowSetup();
+    const guessWordProp = wrapper.props().handleGuessWord;
+    expect(guessWordProp).toBeInstanceOf(Function);
+  });
+});

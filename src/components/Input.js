@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { Form, FormGroup, Label, Button, Input as In } from "reactstrap";
 
+import { handleGuessWord } from "../slices/guessedWordsSlice";
+
 const Input = ({ success }) => (
   <div data-test="component-input">
     {success === false && (
@@ -31,4 +33,4 @@ const mapStateToProps = state => ({
   success: state.success
 });
 
-export default connect(mapStateToProps)(Input);
+export default connect(mapStateToProps, { handleGuessWord })(Input);
