@@ -23,7 +23,7 @@ const GuessedWords = ({ guessedWords }) => (
           <tbody>
             {guessedWords.map(({ guessedWord, letterMatchCount }, index) => (
               <tr data-test="guessed-word" key={index}>
-                <th scope="row">{index}</th>
+                <th scope="row">{index + 1}</th>
                 <td>{guessedWord}</td>
                 <td>{letterMatchCount}</td>
               </tr>
