@@ -21,7 +21,9 @@ describe("getSecretWord async action creator and secretWordSlice", () => {
 
       request.respondWith({
         status: 200,
-        response: secretWord
+        response: {
+          secretWord
+        }
       });
     });
 

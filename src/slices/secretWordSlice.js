@@ -15,7 +15,9 @@ export default secretWordSlice.reducer;
 
 export const getSecretWord = () => async dispatch => {
   const response = await axios.get("http://localhost:3030");
-  dispatch(setSecretWord(response.data));
+  // console.log(response);
+  dispatch(setSecretWord(response.data.secretWord));
+  // dispatch(setSecretWord(response.data));
   // return response;
 };
 
