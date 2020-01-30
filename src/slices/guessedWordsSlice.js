@@ -25,7 +25,7 @@ export default guessedWordsSlice.reducer;
 
 export const handleGuessWord = guessedWord => (dispatch, getState) => {
   try {
-    const secretWord = getState().secretWord;
+    const secretWord = String(getState().secretWord);
     const letterMatchCount = getLetterMatchCount(guessedWord, secretWord);
 
     dispatch(guessWord({ guessedWord, letterMatchCount }));

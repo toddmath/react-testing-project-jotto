@@ -3,7 +3,7 @@ import { shallow } from "enzyme";
 
 import { findByTestAttr, storeFactory } from "../../test/testUtils";
 
-import Input from "./Input";
+import Input, { Input as UnConnectedInput } from "./Input";
 
 /**
  * Factory function to create a ShallowWrapper for the `Input` component.
@@ -15,6 +15,11 @@ const setup = (initialState = {}) => {
   return shallow(<Input store={storeFactory(initialState)} />, initialState)
     .dive()
     .dive();
+};
+
+const unconnectSetup = (initialState = {}) => {
+  const props = { ...initialState };
+  return shallow(<UnConnectedInput {...props} />, initialState);
 };
 
 const shallowSetup = (initialState = {}) => {
@@ -82,8 +87,22 @@ describe("render", () => {
   });
 });
 
-// TODO: add updates state test to Input.test.js
-describe("updates state", () => {});
+describe("`guessWord` action creator call", () => {
+  test("calls `guessWord` upon button click", () => {
+    const mockGuessWord = jest.fn();
+    const props = {
+      success: false,
+      handleGuessWord: mockGuessWord
+    };
+    const wrapper = unconnectSetup(props);
+    // console.log(wrapper.debug());
+    const submitButton = findByTestAttr(wrapper, "submit-button");
+    submitButton.simulate("click");
+    const guessWordCallCount = mockGuessWord.mock.calls.length;
+    expect(guessWordCallCount).toBe(1);
+    expect(mockGuessWord).toHaveBeenCalled();
+  });
+});
 
 describe("redux props", () => {
   test("has success piece of state as prop", () => {

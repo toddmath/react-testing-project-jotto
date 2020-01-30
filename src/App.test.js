@@ -45,3 +45,17 @@ describe("App component", () => {
     });
   });
 });
+
+// describe("UnConnectedApp", () => {
+//   test("`getSecretWord` runs on App mount", () => {
+//     const getSecretWordMock = jest.fn();
+//     const props = {
+//       getSecretWord: getSecretWordMock,
+//       success: false,
+//       guessedWords: []
+//     };
+//     const wrapper = shallow(<UnConnectedApp {...props} />);
+//     console.log(wrapper.debug());
+//     // wrapper.
+//   });
+// });

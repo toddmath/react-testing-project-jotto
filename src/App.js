@@ -1,24 +1,26 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 // import { createSelector } from "reselect";
 
 import { Container } from "reactstrap";
 import { Congrats, GuessedWords, Input } from "./components";
 import { getSecretWord } from "./slices/secretWordSlice";
-// import guessedWords from "./slices/guessedWordsSlice";
 
 import "./App.css";
 
-const App = () => {
+const App = ({ guessedWords, secretWord, success, getSecretWord }) => {
+  useEffect(() => {
+    if (secretWord === null || secretWord.length < 1) {
+      getSecretWord();
+    }
+  }, [secretWord, getSecretWord]);
+
   return (
     <Container className="themed-container">
       <h1 className="display-3">Jotto</h1>
-      <Congrats data-test="congrats-component" success={true} />
+      <Congrats data-test="congrats-component" success={success} />
       <Input />
-      <GuessedWords
-        data-test="guessed-component"
-        guessedWords={[{ guessedWord: "train", letterMatchCount: 3 }]}
-      />
+      <GuessedWords data-test="guessed-component" guessedWords={guessedWords} />
     </Container>
   );
 };

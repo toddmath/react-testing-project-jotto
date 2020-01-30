@@ -4,7 +4,7 @@ import { Form, FormGroup, Label, Button, Input as In } from "reactstrap";
 
 import { handleGuessWord } from "../slices/guessedWordsSlice";
 
-const Input = ({ success }) => (
+export const Input = ({ success, handleGuessWord }) => (
   <div data-test="component-input">
     {success === false && (
       <Form inline>
@@ -20,7 +20,12 @@ const Input = ({ success }) => (
             placeholder="enter guess"
             bsSize="md"
           />
-          <Button data-test="submit-button" type="submit" color="primary">
+          <Button
+            data-test="submit-button"
+            onClick={handleGuessWord("train")}
+            type="submit"
+            color="primary"
+          >
             Submit
           </Button>
         </FormGroup>
